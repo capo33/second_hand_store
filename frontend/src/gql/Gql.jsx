@@ -33,26 +33,28 @@ export const GET_PRODUCTS = gql`
       stock
       onSale
       slug
-       category {
+      category {
         category
-       }
+      }
     }
   }
-`;	
+`;
 
-// export const GET_PRODUCT = gql`
-//   query($slug: String!) {
-//     product(slug: $slug) {
-//       id
-//       image
-//       rating
-//       title
-//       price
-//       description
-//       stock
-//       onSale
-//       slug
-//       category
-//     }
-//   }
-// `;
+export const GET_PRODUCT = gql`
+  query ($slug: String!) {
+    product(slug: $slug) {
+      id
+      image
+      rating
+      title
+      price
+      description
+      stock
+      onSale
+      slug
+      category {
+        category
+      }
+    }
+  }
+`;

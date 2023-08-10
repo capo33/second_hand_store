@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 import Images from "../../assets/images";
 import Rating from "../Rating/Rating";
 
-// const GET_PRODUCTS = gql`
-//   {
-
 const Card = ({ data }) => {
   return (
     <div className='grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-8 m-16'>
       {data?.map((product) => (
         <div className=''>
-          <Link to={`/product/${product.id}`}>
+          <Link to={`/product/${product.slug}`}>
             <img
               className='rounded w-full h-80 object-cover object-center  '
               src={Images[product.image]}

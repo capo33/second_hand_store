@@ -8,7 +8,8 @@ import { RouterProvider } from "react-router-dom";
 import routes from "./routes/routes";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  // uri: "http://localhost:4000",
+  uri: "https://secondhandstore-production-b554.up.railway.app/",
   cache: new InMemoryCache(),
 });
 

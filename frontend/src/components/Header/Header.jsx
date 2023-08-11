@@ -65,7 +65,7 @@ const Header = () => {
             <li className='nav-item'>
               <Link
                 className='px-3 py-2 flex items-center text-2xl  leading-snug  hover:opacity-75'
-                to='/'
+                to='/cart'
               >
                 Cart
                 <div class='flex relative hover:opacity-75'>

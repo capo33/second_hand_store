@@ -18,6 +18,7 @@ import tshirt from "./images/t-shirt.jpg";
 import Jacket from "./images/jacket.jpg";
 import shoes from "./images/shoes.jpg";
 import jeans from "./images/jeans.jpg";
+import emptyCart from "./images/emptyCart.jpg";
 
 const Images = {
   Vase,
@@ -40,6 +41,7 @@ const Images = {
   Jacket,
   shoes,
   jeans,
+  emptyCart,
 };
 
 export default Images;

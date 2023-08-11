@@ -10,10 +10,10 @@ import ProductDetails from "../pages/Home/ProductDetails";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
+    <Route path='/' element={<App />} >
       <Route path='' element={<Home />} />
       <Route path='product/:slug' element={<ProductDetails />} />
-     </Route>
+    </Route>
   )
 );
 

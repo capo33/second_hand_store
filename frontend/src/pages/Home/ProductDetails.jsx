@@ -1,27 +1,72 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
-
+ 
 import { GET_PRODUCT } from "../../gql/Gql";
 import Images from "../../assets/images";
 import Rating from "../../components/Rating/Rating";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
+import { CartContext } from "../../context/CartProvider";
 
 const ProductDetails = () => {
   const { slug } = useParams();
-
+  const context = useContext(CartContext);
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: { slug },
   });
+
+  const { cartItems, setCartItems } = context;
 
   const product = data?.product;
 
   if (loading) return <Loader />;
 
   if (error) return <Message error={error} />;
-  
+
+  const addToCartHandler = () => {
+    const exist = cartItems.find((x) => x.id === product.id);
+
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...cartItems, { ...product, qty: 1 }])
+      );
+    }
+  };
+
+  const removeFromCartHandler = () => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist?.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(cartItems.filter((x) => x.id !== product.id))
+      );
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(
+          cartItems.map((x) =>
+            x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          )
+        )
+      );
+    }
+  };
+
   return (
     <section className='text-gray-700 body-font overflow-hidden bg-white'>
       <div className='container px-5 py-24 mx-auto'>
@@ -65,9 +110,21 @@ const ProductDetails = () => {
               <span className='title-font font-medium text-2xl text-gray-900'>
                 ${product.price}
               </span>
-              <button className='flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded'>
-                <Link to={`/cart/${product.slug}`}>Add to Cart</Link>
-              </button>
+              {cartItems.find((x) => x.id === product.id) ? (
+                <button
+                  onClick={removeFromCartHandler}
+                  className='flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded'
+                >
+                  Remove from cart
+                </button>
+              ) : (
+                <button
+                  onClick={addToCartHandler}
+                  className='flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded'
+                >
+                  Add to cart
+                </button>
+              )}
             </div>
           </div>
         </div>

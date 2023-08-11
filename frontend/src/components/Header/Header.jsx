@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
 import {
   ShoppingCartIcon,
   Bars4Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { CartContext } from "../../context/CartProvider";
 
-const Header = ({ fixed }) => {
+const Header = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const context = useContext(CartContext);
+
+  const { cartItems } = context;
+
   return (
     <nav className='sticky top-0 flex flex-wrap items-center justify-between px-2 py-3 bg-amber-400 text-black'>
       <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
@@ -24,9 +30,9 @@ const Header = ({ fixed }) => {
             onClick={() => setNavbarOpen(!navbarOpen)}
           >
             {navbarOpen ? (
-              <Bars4Icon className='w-6 h-6' />
-            ) : (
               <XMarkIcon className='w-6 h-6' />
+            ) : (
+              <Bars4Icon className='w-6 h-6' />
             )}
           </button>
         </div>
@@ -61,7 +67,15 @@ const Header = ({ fixed }) => {
                 className='px-3 py-2 flex items-center text-2xl  leading-snug  hover:opacity-75'
                 to='/'
               >
-                <ShoppingCartIcon className='w-6 h-6 me-1' /> Cart
+                Cart
+                <div class='flex relative hover:opacity-75'>
+                  <div class='absolute left-4 bottom-3'>
+                    <p class='flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white'>
+                      {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                    </p>
+                  </div>
+                  <ShoppingCartIcon className='w-6 h-6 me-1 ' />
+                </div>
               </Link>
             </li>
           </ul>

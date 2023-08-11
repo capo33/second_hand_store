@@ -14,7 +14,7 @@ const Hero = () => {
   if (error) return <Message message={error.message} />;
   
   return (
-    <div className='bg-slate-400'>
+    <div className='bg-slate-100'>
       <div className='text-center p-6 text-5xl flex justify-center flex-wrap items-center gap-6'>
         <h2>
           Find secound hand <br /> items in <br />

@@ -11,6 +11,31 @@ export const GET_CATEGORIES = gql`
   }
 `;
 
+export const GET_CATEGORY = gql`
+  query ($slug: String!) {
+    category(slug: $slug) {
+      id
+      category
+      image
+      slug
+      products {
+        id
+        image
+        rating
+        title
+        price
+        description
+        stock
+        onSale
+        slug
+        category {
+          category
+        }
+      }
+    }
+  }
+`;
+
 export const GET_MAIN_CARDS = gql`
   {
     mainCards {

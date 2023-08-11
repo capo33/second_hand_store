@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import {
   ShoppingCartIcon,
   Bars4Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+
 import { CartContext } from "../../context/CartProvider";
 
 const Header = () => {
@@ -15,11 +15,11 @@ const Header = () => {
   const { cartItems } = context;
 
   return (
-    <nav className='sticky top-0 flex flex-wrap items-center justify-between px-2 py-3 bg-amber-400 text-black'>
+    <nav className='sticky top-0 flex flex-wrap items-center justify-between px-2 py-3 bg-teal-500 text-black'>
       <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
         <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
           <Link
-            className='text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap'
+            className='text-2xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap'
             to='/'
           >
             Second Hand Store
@@ -49,7 +49,6 @@ const Header = () => {
                 className='px-3 py-2 flex items-center text-2xl  leading-snug hover:opacity-75'
                 to='/'
               >
-                <i className='fab fa-facebook-square text-2xl leading-lg opacity-75'></i>
                 Store
               </Link>
             </li>
@@ -58,8 +57,7 @@ const Header = () => {
                 className='px-3 py-2 flex items-center text-2xl  leading-snug  hover:opacity-75'
                 to='/'
               >
-                <i className='fab fa-twitter text-2xl leading-lg  opacity-75'></i>
-                Tweet
+                Contact
               </Link>
             </li>
             <li className='nav-item'>
@@ -70,9 +68,15 @@ const Header = () => {
                 Cart
                 <div class='flex relative hover:opacity-75'>
                   <div class='absolute left-4 bottom-3'>
-                    <p class='flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white'>
-                      {cartItems.reduce((acc, item) => acc + item.qty, 0)}
-                    </p>
+                    {cartItems.length === 0 ? (
+                      <p class='flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white'>
+                        {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                      </p>
+                    ) : (
+                      <p class='flex h-2 w-2 items-center justify-center rounded-full bg-blue-500 p-3 text-xs text-white'>
+                        {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                      </p>
+                    )}
                   </div>
                   <ShoppingCartIcon className='w-6 h-6 me-1 ' />
                 </div>

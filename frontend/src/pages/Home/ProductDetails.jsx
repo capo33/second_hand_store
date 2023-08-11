@@ -108,7 +108,7 @@ const ProductDetails = () => {
             </div>
             <div className='flex'>
               <span className='title-font font-medium text-2xl text-gray-900'>
-                ${product.price}
+                €{product.price}
               </span>
               {cartItems.find((x) => x.id === product.id) ? (
                 <button
@@ -120,7 +120,7 @@ const ProductDetails = () => {
               ) : (
                 <button
                   onClick={addToCartHandler}
-                  className='flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded'
+                  className='flex ml-auto text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded'
                 >
                   Add to cart
                 </button>
